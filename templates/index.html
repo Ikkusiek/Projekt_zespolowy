@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <div id="products_list">
+        {% for product in products %}
+            {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                <div class="row">
+            {% endif %}
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="">
+                                    {% if product.image %}
+                                        <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                                    {% else %}
+                                        <img src="{% static 'image/no_image.jpg' %}" alt="no_image" />
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">{{ product.name }}</div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-6">Cena</div>
+                                    <div class="col-md-6">{{ product.price }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12"><button type="button" class="btn btn-primary">Do koszyka</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% if forloop.counter|divisibleby:3 %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
